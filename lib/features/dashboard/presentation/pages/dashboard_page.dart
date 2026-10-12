@@ -185,10 +185,12 @@ class _DashboardPageState extends State<DashboardPage> {
           return MetricCard(
             icon: Icons.directions_walk_rounded,
             iconColor: AppColors.steps,
-            title: 'Steps',
+            title: 'Daily Steps',
             value: 'Permission Required',
             unit: '',
-            subtitle: 'Tap to grant physical activity permission',
+            subtitle: state.isPermanentlyDenied
+                ? 'You need to give permission in App Settings to start tracking steps. Tap to open Settings.'
+                : 'You need to give permission first to start tracking steps. Tap here to allow.',
             onTap: () {
               if (state.isPermanentlyDenied) {
                 context.read<StepsCubit>().openAppSettings();
@@ -196,7 +198,32 @@ class _DashboardPageState extends State<DashboardPage> {
                 context.read<StepsCubit>().requestPermission();
               }
             },
-            trailing: const Icon(Icons.lock_outline_rounded, color: AppColors.steps),
+            trailing: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              decoration: BoxDecoration(
+                color: AppColors.steps.withValues(alpha: 0.15),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    state.isPermanentlyDenied ? Icons.settings_rounded : Icons.lock_open_rounded,
+                    size: 14,
+                    color: AppColors.steps,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    state.isPermanentlyDenied ? 'Settings' : 'Grant',
+                    style: const TextStyle(
+                      color: AppColors.steps,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         }
 
@@ -204,10 +231,13 @@ class _DashboardPageState extends State<DashboardPage> {
           return MetricCard(
             icon: Icons.directions_walk_rounded,
             iconColor: AppColors.steps,
-            title: 'Steps',
-            value: 'Sensor Unavailable',
-            unit: '',
-            subtitle: state.message,
+            title: 'Daily Steps',
+            value: '0',
+            unit: 'steps',
+            subtitle: 'Hardware sensor inactive on emulator. Steps track automatically on physical device.',
+            onTap: () {
+              context.read<StepsCubit>().requestPermission();
+            },
           );
         }
 
@@ -217,7 +247,7 @@ class _DashboardPageState extends State<DashboardPage> {
         return MetricCard(
           icon: Icons.directions_walk_rounded,
           iconColor: AppColors.steps,
-          title: 'Steps',
+          title: 'Daily Steps',
           value: steps.toString(),
           unit: 'steps',
           subtitle: 'Goal: ${AppConstants.defaultDailyStepGoal} steps',
