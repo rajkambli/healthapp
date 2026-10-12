@@ -1,4 +1,4 @@
-# Flutter Health Dashboard 🏃‍♂️💤🔥
+# Flutter Health Dashboard 
 
 A production-oriented Flutter health dashboard app designed to track and visualize daily physical activity, calorie burn, and sleep cycles. Built following Clean Architecture principles, state management with BLoC, local persistence with Hive CE, and resilient offline capabilities.
 
