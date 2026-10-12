@@ -253,4 +253,5 @@ flutter test
 
 | Dashboard Screen | Sleep Analysis Screen | Log Sleep Form |
 |:---:|:---:|:---:|
-| Daily date, real-time Steps, Calories burn, and Sleep summary with offline support | Total sleep headline, efficiency rating, interactive stage breakdown bar & legend | Start/end datetime pickers crossing midnight, dynamic stage segment editor |
+| <img src="screenshots/dashboard_screenshot.png" width="260" alt="Dashboard Screen" /> | <img src="screenshots/sleep_details_screenshot.png" width="260" alt="Sleep Analysis Screen" /> | <img src="screenshots/sleep_log_screenshot.png" width="260" alt="Log Sleep Form" /> |
+| Real-time Steps, Calories burn, and Sleep summary with offline support | Total sleep headline, efficiency rating, interactive stage breakdown bar & legend | Start/end datetime pickers crossing midnight, dynamic stage segment editor |
